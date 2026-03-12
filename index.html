@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Table Bianchi — Corporate Catering & Hospitality</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #c9a96e;
+            --gold-light: #e0c68a;
+            --gold-dim: rgba(201,169,110,0.15);
+            --bg: #0a0a0a;
+            --bg-section: #0f0f0f;
+            --bg-card: #141414;
+            --text: #e8e8e8;
+            --text-dim: #999;
+            --border: rgba(201,169,110,0.2);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* ===== LIGHT EFFECTS ===== */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(120px);
+            opacity: 0.08;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+        .glow-orb--1 { width: 600px; height: 600px; background: var(--gold); top: -200px; left: -200px; animation-delay: 0s; }
+        .glow-orb--2 { width: 500px; height: 500px; background: #fff; bottom: -150px; right: -150px; animation-delay: -7s; }
+        .glow-orb--3 { width: 400px; height: 400px; background: var(--gold); top: 50%; left: 50%; animation-delay: -14s; }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(80px, -60px) scale(1.1); }
+            66% { transform: translate(-60px, 80px) scale(0.9); }
+        }
+
+        /* ===== CURSOR LIGHT ===== */
+        .cursor-light {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+
+        /* ===== LANGUAGE TOGGLE ===== */
+        .lang-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 1000;
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,10,0.85);
+        }
+        .lang-btn {
+            padding: 10px 22px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            background: transparent;
+            color: var(--text-dim);
+            transition: all 0.4s ease;
+        }
+        .lang-btn.active {
+            background: var(--gold);
+            color: #0a0a0a;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,10,0.7);
+            border-bottom: 1px solid rgba(201,169,110,0.08);
+            transition: transform 0.4s;
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+        .nav-cta {
+            padding: 10px 28px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+        }
+        .nav-cta:hover {
+            background: var(--gold);
+            color: #0a0a0a;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            position: relative;
+            z-index: 2;
+            padding: 120px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        section:nth-child(even) { background: transparent; }
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+        .reveal-delay-4 { transition-delay: 0.6s; }
+
+        /* ===== TYPOGRAPHY ===== */
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        .headline--hero {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: #fff;
+            margin-bottom: 28px;
+        }
+        .headline--section {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .subheadline {
+            font-size: clamp(1rem, 1.4vw, 1.15rem);
+            color: var(--text-dim);
+            max-width: 720px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding-top: 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center bottom, rgba(201,169,110,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero .subheadline { margin: 0 auto 48px; }
+
+        /* ===== GOLD LINE ===== */
+        .gold-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 40px;
+            opacity: 0;
+            transform: scaleX(0);
+            transition: all 1s ease 0.3s;
+        }
+        .gold-line.visible {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 48px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s, border-color 0.4s;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+        .btn-primary:hover {
+            color: #0a0a0a;
+            border-color: var(--gold);
+        }
+        .btn-primary:hover::before { left: 0; }
+
+        .btn-secondary {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        .btn-secondary:hover { color: var(--gold); }
+
+        /* ===== PAIN POINTS ===== */
+        .pain-list {
+            list-style: none;
+            margin: 32px 0;
+        }
+        .pain-list li {
+            padding: 14px 0 14px 32px;
+            position: relative;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.95rem;
+        }
+        .pain-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 8px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        /* ===== CARDS GRID ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 40px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s, transform 0.4s;
+        }
+        .service-card:hover {
+            border-color: var(--border);
+            transform: translateY(-4px);
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .service-card:hover::before { opacity: 1; }
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+        .service-card ul {
+            list-style: none;
+        }
+        .service-card ul li {
+            padding: 6px 0 6px 20px;
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            position: relative;
+        }
+        .service-card ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 13px;
+            width: 6px;
+            height: 6px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+        }
+
+        /* ===== PILLARS ===== */
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 48px;
+        }
+        .pillar {
+            text-align: center;
+            padding: 48px 24px;
+            border: 1px solid rgba(255,255,255,0.04);
+            position: relative;
+        }
+        .pillar-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: rgba(201,169,110,0.15);
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .pillar h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .pillar p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* ===== STEPS ===== */
+        .steps {
+            margin-top: 48px;
+            position: relative;
+        }
+        .steps::before {
+            content: '';
+            position: absolute;
+            left: 24px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+        }
+        .step {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 48px;
+            padding-left: 64px;
+            position: relative;
+        }
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            background: var(--bg);
+            z-index: 1;
+        }
+        .step h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: #fff;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .step p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        /* ===== FOR YOU ===== */
+        .for-you-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 40px;
+        }
+        .for-you-col h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .for-you-col--yes h3 { color: var(--gold); }
+        .for-you-col--no h3 { color: var(--text-dim); }
+        .for-you-col ul { list-style: none; }
+        .for-you-col ul li {
+            padding: 10px 0 10px 28px;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .for-you-col--yes ul li::before {
+            content: '+';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .for-you-col--no ul li::before {
+            content: '\2013';
+            position: absolute;
+            left: 0;
+            color: #555;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .testimonial {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 40px 32px;
+            position: relative;
+        }
+        .testimonial::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: rgba(201,169,110,0.15);
+            position: absolute;
+            top: 16px;
+            left: 24px;
+            line-height: 1;
+        }
+        .testimonial blockquote {
+            font-size: 0.92rem;
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 24px;
+            padding-top: 24px;
+            line-height: 1.8;
+        }
+        .testimonial cite {
+            font-style: normal;
+            font-size: 0.82rem;
+            color: var(--gold);
+            display: block;
+        }
+        .testimonial cite span {
+            display: block;
+            color: var(--text-dim);
+            font-size: 0.78rem;
+            margin-top: 4px;
+        }
+
+        /* ===== FAQ ===== */
+        .faq-list { margin-top: 48px; }
+        .faq-item {
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 24px 40px 24px 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #fff;
+            cursor: pointer;
+            position: relative;
+            transition: color 0.3s;
+        }
+        .faq-question:hover { color: var(--gold); }
+        .faq-question::after {
+            content: '+';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
+            color: var(--gold);
+            transition: transform 0.3s;
+        }
+        .faq-item.open .faq-question::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+        }
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-bottom: 24px;
+        }
+        .faq-answer p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-commitments {
+            margin-top: 32px;
+            list-style: none;
+        }
+        .about-commitments li {
+            padding: 10px 0 10px 28px;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+        .about-commitments li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 16px;
+            width: 10px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 160px 40px;
+            position: relative;
+        }
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(201,169,110,0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .final-cta .subheadline {
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 16px;
+        }
+        .final-cta .btn-primary { margin-top: 40px; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 80px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+        }
+        .footer-col h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+        .footer-col p, .footer-col a {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            line-height: 2;
+            display: block;
+        }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            text-align: center;
+            font-size: 0.78rem;
+            color: #555;
+        }
+
+        /* ===== SEPARATOR ===== */
+        .section-divider {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,169,110,0.2), transparent);
+        }
+
+        /* ===== SHIMMER TEXT ===== */
+        .shimmer {
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 40%, #fff 50%, var(--gold-light) 60%, var(--gold) 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ===== PARTICLE LINE ===== */
+        .particle-line {
+            position: relative;
+            height: 1px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            overflow: visible;
+        }
+        .particle-line::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+            filter: blur(1px);
+            animation: particleSlide 6s ease-in-out infinite;
+            box-shadow: 0 0 10px var(--gold), 0 0 30px rgba(201,169,110,0.3);
+        }
+        @keyframes particleSlide {
+            0%, 100% { left: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: calc(100% - 40px); opacity: 0; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            section { padding: 80px 24px; }
+            .pillars { grid-template-columns: 1fr; gap: 24px; }
+            .for-you-grid { grid-template-columns: 1fr; gap: 32px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .testimonials-grid { grid-template-columns: 1fr; }
+            .nav { padding: 16px 20px; }
+            .lang-toggle { top: 16px; right: 16px; }
+            .lang-btn { padding: 8px 14px; font-size: 0.7rem; }
+            .hero { padding-top: 100px; }
+            .final-cta { padding: 100px 24px; }
+        }
+
+        /* ===== LANG DISPLAY ===== */
+        [data-lang="pt"] { display: none; }
+        body.lang-pt [data-lang="en"] { display: none; }
+        body.lang-pt [data-lang="pt"] { display: block; }
+        body.lang-pt .hero[data-lang="pt"],
+        body.lang-pt .final-cta[data-lang="pt"] {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient Light Orbs -->
+    <div class="glow-orb glow-orb--1"></div>
+    <div class="glow-orb glow-orb--2"></div>
+    <div class="glow-orb glow-orb--3"></div>
+    <div class="cursor-light" id="cursorLight"></div>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button class="lang-btn active" data-target="en" onclick="switchLang('en')">EN</button>
+        <button class="lang-btn" data-target="pt" onclick="switchLang('pt')">PT</button>
+    </div>
+
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-logo">THE TABLE BIANCHI</div>
+        <a href="#contact" class="nav-cta" data-lang="en">Enquire Now</a>
+        <a href="#contact" class="nav-cta" data-lang="pt">Solicite um Orçamento</a>
+    </nav>
+
+    <!-- ==================== ENGLISH ==================== -->
+
+    <!-- S01 Hero -->
+    <section class="hero" data-lang="en">
+        <div class="section-label reveal">Corporate Catering &amp; Hospitality</div>
+        <h1 class="headline headline--hero reveal reveal-delay-1">Corporate Hospitality,<br><span class="shimmer">Flawlessly Executed.</span></h1>
+        <p class="subheadline reveal reveal-delay-2">The Table Bianchi delivers bespoke catering for high-stakes corporate events across the United Kingdom. From board-level dinners to investor receptions, we bring precision, discretion and culinary excellence — so your event reflects the standard your business demands.</p>
+        <a href="#contact" class="btn-primary reveal reveal-delay-3">Enquire Now</a>
+    </section>
+
+    <div class="particle-line" data-lang="en"></div>
+
+    <!-- S02 Pain -->
+    <section data-lang="en">
+        <div class="section-label reveal">The Challenge</div>
+        <h2 class="headline headline--section reveal">You Know the Stakes.<br>So Do We.</h2>
+        <p class="reveal reveal-delay-1" style="max-width:720px; color:var(--text-dim); margin-bottom:24px;">Planning a corporate event carries weight. Every detail sends a signal — to investors, partners, clients and stakeholders. And yet, finding a catering partner who truly understands this pressure is remarkably difficult.</p>
+        <ul class="pain-list reveal reveal-delay-2">
+            <li>Catering providers who treat a boardroom dinner the same as a birthday party</li>
+            <li>Service staff who lack the discretion and professionalism your environment requires</li>
+            <li>Menus that feel generic, uninspired or misaligned with the tone of your event</li>
+            <li>Last-minute operational failures that put your company's reputation at risk</li>
+            <li>Vendors who require constant oversight — adding to your workload instead of removing it</li>
+            <li>Logistical coordination that falls apart under pressure</li>
+        </ul>
+        <p class="reveal reveal-delay-3" style="margin-top:32px; font-size:1.05rem; color:#fff;">In corporate hospitality, there is no room for error. Your event is not just a gathering — it is an extension of your brand, your credibility and your leadership.</p>
+    </section>
+
+    <div class="section-divider" data-lang="en"></div>
+
+    <!-- S03 Origin -->
+    <section data-lang="en">
+        <div class="section-label reveal">Our Story</div>
+        <h2 class="headline headline--section reveal">Why The Table Bianchi Exists</h2>
+        <div class="gold-line reveal"></div>
+        <p class="reveal reveal-delay-1" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">The Table Bianchi was founded on a single conviction: that corporate hospitality deserves the same rigour, strategy and attention to detail as the business decisions made around the table.</p>
+        <p class="reveal reveal-delay-2" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">Too often, catering is treated as an afterthought — a checkbox on an event planner's list. We saw an opportunity to change that. To build a service that operates with the discipline of a corporate partner and the artistry of a fine dining kitchen.</p>
+        <p class="reveal reveal-delay-3" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">Our name carries intent. <strong style="color:var(--gold)">"The Table"</strong> represents the space where decisions are made, relationships are built and trust is earned. <strong style="color:var(--gold)">"Bianchi"</strong> reflects our commitment to clarity, cleanliness of execution and the quiet confidence that defines everything we do.</p>
+        <p class="reveal reveal-delay-4" style="max-width:720px; color:#fff; font-size:1.05rem; margin-top:32px;">We are not simply a catering company. We are the hospitality arm of your business.</p>
+    </section>
+
+    <div class="particle-line" data-lang="en"></div>
+
+    <!-- S04 Services -->
+    <section data-lang="en">
+        <div class="section-label reveal">Our Services</div>
+        <h2 class="headline headline--section reveal">Tailored to Every<br>Corporate Occasion</h2>
+        <p class="subheadline reveal reveal-delay-1">We specialise in high-level corporate events where the quality of hospitality directly impacts the quality of the outcome.</p>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <h3>Executive Boardroom Meetings</h3>
+                <ul>
+                    <li>Refined breakfast, lunch or afternoon menus for focused sessions</li>
+                    <li>Discreet service that does not interrupt discussion</li>
+                    <li>Dietary and cultural requirements handled with precision</li>
+                    <li>Presentation aligned with your corporate identity</li>
+                </ul>
+            </div>
+            <div class="service-card reveal reveal-delay-1">
+                <h3>Investor &amp; Stakeholder Events</h3>
+                <ul>
+                    <li>Menus curated to reflect the calibre of your audience</li>
+                    <li>Impeccable table styling and service choreography</li>
+                    <li>Strategic food and beverage pairings</li>
+                    <li>Every touchpoint designed to reinforce credibility</li>
+                </ul>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <h3>Product Launches &amp; Unveilings</h3>
+                <ul>
+                    <li>Gastronomy that complements your brand narrative</li>
+                    <li>Creative menu concepts aligned with your theme</li>
+                    <li>Seamless coordination with your production team</li>
+                    <li>Scalable from intimate previews to large receptions</li>
+                </ul>
+            </div>
+            <div class="service-card reveal reveal-delay-3">
+                <h3>Private Corporate Dinners</h3>
+                <ul>
+                    <li>Multi-course fine-dining experiences</li>
+                    <li>Wine and beverage pairing consultation</li>
+                    <li>Personalised menu cards and table design</li>
+                    <li>An atmosphere of exclusivity and sophistication</li>
+                </ul>
+            </div>
+            <div class="service-card reveal reveal-delay-4">
+                <h3>Strategic Networking Events</h3>
+                <ul>
+                    <li>Canape-style menus designed for flow and conversation</li>
+                    <li>Live stations and interactive food experiences</li>
+                    <li>Service designed to facilitate connection</li>
+                    <li>Elegant presentation that speaks before you do</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="en"></div>
+
+    <!-- S05 Pillars -->
+    <section data-lang="en">
+        <div class="section-label reveal" style="text-align:center">Our Standard</div>
+        <h2 class="headline headline--section reveal" style="text-align:center">Three Pillars. One Standard.</h2>
+        <p class="subheadline reveal reveal-delay-1" style="text-align:center; margin:0 auto 48px;">Everything we deliver is built upon three non-negotiable principles.</p>
+        <div class="pillars">
+            <div class="pillar reveal">
+                <div class="pillar-number">I</div>
+                <h3>Precision</h3>
+                <p>We operate with the discipline your business expects. Every timeline meticulously planned. Every delivery window respected. Every detail — from temperature to cutlery alignment — considered.</p>
+            </div>
+            <div class="pillar reveal reveal-delay-1">
+                <div class="pillar-number">II</div>
+                <h3>Discretion</h3>
+                <p>Our team is trained in corporate etiquette and professional conduct. We read the room. We serve without being seen and solve problems before they surface.</p>
+            </div>
+            <div class="pillar reveal reveal-delay-2">
+                <div class="pillar-number">III</div>
+                <h3>Distinction</h3>
+                <p>Every menu developed from scratch. Premium ingredients, refined technique, intentional elegance. Designed to reflect the standard of your business.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="particle-line" data-lang="en"></div>
+
+    <!-- S06 Steps -->
+    <section data-lang="en">
+        <div class="section-label reveal">The Process</div>
+        <h2 class="headline headline--section reveal">Your Experience With Us</h2>
+        <p class="subheadline reveal reveal-delay-1">From first contact to final farewell, every step is handled with care, clarity and professionalism.</p>
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <div>
+                    <h3>Strategic Consultation</h3>
+                    <p>We begin with a detailed conversation about your event — objectives, audience profile, venue, dietary considerations. This is not a sales call. It is a strategic briefing.</p>
+                </div>
+            </div>
+            <div class="step reveal reveal-delay-1">
+                <div class="step-number">02</div>
+                <div>
+                    <h3>Bespoke Menu Development</h3>
+                    <p>Our culinary team designs a custom menu. Every dish selected with purpose — flavour, presentation, seasonality. You review, refine and approve before we proceed.</p>
+                </div>
+            </div>
+            <div class="step reveal reveal-delay-2">
+                <div class="step-number">03</div>
+                <div>
+                    <h3>Logistics &amp; Planning</h3>
+                    <p>We handle every operational detail: sourcing, preparation timelines, equipment, staffing, transport and venue coordination. A detailed plan shared with you in advance.</p>
+                </div>
+            </div>
+            <div class="step reveal reveal-delay-3">
+                <div class="step-number">04</div>
+                <div>
+                    <h3>Flawless Execution</h3>
+                    <p>On the day, our team arrives ahead of schedule. Setup completed with precision. Service delivered seamlessly. Our on-site coordinator manages every moving part.</p>
+                </div>
+            </div>
+            <div class="step reveal reveal-delay-4">
+                <div class="step-number">05</div>
+                <div>
+                    <h3>Discreet Departure</h3>
+                    <p>Full breakdown, cleaning and departure managed silently. The space returned exactly as it was — or better. You will not need to manage a thing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="en"></div>
+
+    <!-- S07 For You -->
+    <section data-lang="en">
+        <div class="section-label reveal">Qualification</div>
+        <h2 class="headline headline--section reveal">Is The Table Bianchi<br>Right For You?</h2>
+        <div class="for-you-grid">
+            <div class="for-you-col for-you-col--yes reveal">
+                <h3>The Table Bianchi is for you if:</h3>
+                <ul>
+                    <li>You organise corporate events where reputation is on the line</li>
+                    <li>You require a partner with the same professionalism as your business</li>
+                    <li>You value discretion, precision and reliability above all else</li>
+                    <li>Your events involve senior executives, investors or board members</li>
+                    <li>You expect bespoke service — not templated packages</li>
+                    <li>You believe hospitality is a strategic tool</li>
+                    <li>You are based in or hosting events across the UK</li>
+                </ul>
+            </div>
+            <div class="for-you-col for-you-col--no reveal reveal-delay-1">
+                <h3>May not be the right fit if:</h3>
+                <ul>
+                    <li>You are looking for the lowest-cost option available</li>
+                    <li>You prefer standardised menus with no customisation</li>
+                    <li>Your event does not require premium service</li>
+                    <li>You prefer managing catering logistics internally</li>
+                </ul>
+            </div>
+        </div>
+        <p class="reveal" style="margin-top:40px; color:var(--text-dim); font-style:italic;">We are selective about the events we take on — because our standard demands it.</p>
+    </section>
+
+    <div class="particle-line" data-lang="en"></div>
+
+    <!-- S08 Testimonials -->
+    <section data-lang="en">
+        <div class="section-label reveal">Testimonials</div>
+        <h2 class="headline headline--section reveal">What Our Clients Say</h2>
+        <p class="subheadline reveal reveal-delay-1">Trusted by corporate teams across the United Kingdom.</p>
+        <div class="testimonials-grid">
+            <div class="testimonial reveal">
+                <blockquote>We engaged The Table Bianchi for our annual investor dinner in the City. The level of detail was extraordinary — from the menu to the table presentation to the seamless service. Several board members commented on the quality.</blockquote>
+                <cite>Victoria Ashworth<span>Head of Corporate Affairs, Whitmore &amp; Partners LLP, London</span></cite>
+            </div>
+            <div class="testimonial reveal reveal-delay-1">
+                <blockquote>What impressed us most was the professionalism. The team arrived early, executed without a single issue and departed without us noticing. The Table Bianchi understands the corporate environment in a way few caterers do.</blockquote>
+                <cite>James Harrington<span>Managing Director, Harrington Capital Group, Manchester</span></cite>
+            </div>
+            <div class="testimonial reveal reveal-delay-2">
+                <blockquote>They worked closely with our marketing team to create a menu that reflected our brand identity. The feedback from attendees was overwhelmingly positive. Highly recommended for any business that takes hospitality seriously.</blockquote>
+                <cite>Priya Kaur<span>Senior Events Manager, NovaTech Solutions, London</span></cite>
+            </div>
+            <div class="testimonial reveal reveal-delay-3">
+                <blockquote>Organising a private dinner for 40 C-suite guests is not a task I take lightly. The Table Bianchi made the entire process feel effortless. They are our sole catering partner going forward.</blockquote>
+                <cite>Richard Caldwell<span>Chief Operating Officer, Sterling &amp; Moore Advisory, Edinburgh</span></cite>
+            </div>
+            <div class="testimonial reveal">
+                <blockquote>Discretion is non-negotiable in our line of work. The Table Bianchi delivered exactly that — plus outstanding food, flawless timing and a team that conducted themselves with the utmost professionalism.</blockquote>
+                <cite>Eleanor Griffiths<span>Partner, Chambers &amp; Westbrook Solicitors, Birmingham</span></cite>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="en"></div>
+
+    <!-- S09 About -->
+    <section data-lang="en">
+        <div class="section-label reveal">About</div>
+        <h2 class="headline headline--section reveal">The Team Behind the Table</h2>
+        <div class="gold-line reveal"></div>
+        <p class="reveal reveal-delay-1" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">The Table Bianchi is led by a team of culinary and hospitality professionals with extensive experience in fine dining, corporate events and luxury service environments.</p>
+        <p class="reveal reveal-delay-2" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">Our founder built The Table Bianchi with a clear vision: to bridge the gap between outstanding gastronomy and the exacting demands of the corporate world.</p>
+        <p class="reveal reveal-delay-3" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">We do not believe in temporary staff or outsourced teams. When you work with The Table Bianchi, you work with our people — individuals who understand our standards and represent them at every event.</p>
+        <ul class="about-commitments reveal reveal-delay-4">
+            <li>Culinary team trained in fine-dining technique and premium ingredient sourcing</li>
+            <li>Front-of-house staff selected for composure, discretion and professionalism</li>
+            <li>On-site coordinators experienced in high-pressure corporate environments</li>
+            <li>Continuous development in food safety, allergen management and service innovation</li>
+        </ul>
+    </section>
+
+    <div class="particle-line" data-lang="en"></div>
+
+    <!-- S10 FAQ -->
+    <section data-lang="en">
+        <div class="section-label reveal">FAQ</div>
+        <h2 class="headline headline--section reveal">Frequently Asked Questions</h2>
+        <div class="faq-list reveal reveal-delay-1">
+            <div class="faq-item">
+                <button class="faq-question">How far in advance should I book?</button>
+                <div class="faq-answer"><p>We recommend a minimum of three weeks' notice for most corporate events. For large-scale occasions or peak periods, four to six weeks is ideal. Contact us and we will do our best to accommodate your timeline.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Do you cater to dietary requirements and allergies?</button>
+                <div class="faq-answer"><p>Absolutely. Every menu accounts for dietary needs, allergies and cultural preferences. We conduct a thorough briefing during consultation to ensure every guest is catered for with the same standard.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What areas of the United Kingdom do you serve?</button>
+                <div class="faq-answer"><p>We operate across the UK, with primary coverage in London, the South East, Manchester, Birmingham, Edinburgh and surrounding regions. For events outside these areas, please enquire.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Can you work with our existing event planner or venue?</button>
+                <div class="faq-answer"><p>Yes. We regularly coordinate with corporate event planners, venue managers and production teams. Our process integrates seamlessly with your existing arrangements.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What is included in your service?</button>
+                <div class="faq-answer"><p>Strategic consultation, bespoke menu development, premium food production, complete logistics, professional staffing, table styling, on-site coordination and post-event breakdown. Every element tailored to your event.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How is pricing structured?</button>
+                <div class="faq-answer"><p>Pricing is bespoke and based on scope — guest count, menu complexity, service duration and logistics. We provide a detailed, transparent proposal with no hidden costs.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Do you provide tastings before the event?</button>
+                <div class="faq-answer"><p>Yes. For larger events or long-term partnerships, we offer a private tasting session. This is included as part of our planning process for qualifying events.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">What makes The Table Bianchi different?</button>
+                <div class="faq-answer"><p>We operate as a strategic hospitality partner, not a vendor. Our service is built around your business objectives, delivered with the precision and discretion that high-stakes events demand. Everything is bespoke, in-house and held to the highest standard.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="en"></div>
+
+    <!-- S11 Final CTA -->
+    <section class="final-cta" data-lang="en" id="contact">
+        <div class="section-label reveal">Next Step</div>
+        <h2 class="headline headline--hero reveal" style="margin-bottom:28px;">Your Next Event<br><span class="shimmer">Deserves Better.</span></h2>
+        <p class="subheadline reveal reveal-delay-1">Whether it is a boardroom breakfast for ten or a black-tie dinner for two hundred, The Table Bianchi brings the precision, discretion and culinary excellence that your business demands.</p>
+        <p class="reveal reveal-delay-2" style="color:var(--text-dim); max-width:600px; font-size:0.92rem; margin-bottom:24px;">We work with a limited number of clients each month. No obligation. No pressure. Simply a professional consultation to explore how we can support your next occasion.</p>
+        <div class="reveal reveal-delay-3" style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+            <a href="mailto:enquiries@thetablebianchi.co.uk" class="btn-primary">Request a Consultation</a>
+            <a href="tel:+442079460321" class="btn-secondary">Or call us: +44 (0)20 7946 0321</a>
+        </div>
+    </section>
+
+    <!-- S12 Footer EN -->
+    <footer class="footer" data-lang="en">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>The Table Bianchi</h4>
+                <p>Corporate Catering &amp; Hospitality</p>
+                <p style="margin-top:12px; font-size:0.8rem; color:#444;">&copy; 2026 The Table Bianchi Ltd.<br>All rights reserved.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <a href="mailto:enquiries@thetablebianchi.co.uk">enquiries@thetablebianchi.co.uk</a>
+                <a href="tel:+442079460321">+44 (0)20 7946 0321</a>
+            </div>
+            <div class="footer-col">
+                <h4>Address</h4>
+                <p>The Table Bianchi Ltd.</p>
+                <p>47 King William Street</p>
+                <p>London, EC4R 9AF</p>
+                <p>United Kingdom</p>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <a href="#">Instagram: @thetablebianchi</a>
+                <a href="#">LinkedIn: The Table Bianchi</a>
+                <p style="margin-top:12px; font-size:0.78rem; color:#444;">Mon-Fri: 08:00 - 18:00<br>Sat: By appointment</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Registered in England and Wales. Company No. 14829365.
+        </div>
+    </footer>
+
+
+    <!-- ==================== PORTUGUES ==================== -->
+
+    <!-- S01 Hero PT -->
+    <section class="hero" data-lang="pt">
+        <div class="section-label reveal">Catering Corporativo &amp; Hospitalidade</div>
+        <h1 class="headline headline--hero reveal reveal-delay-1">Hospitalidade Corporativa,<br><span class="shimmer">Executada com Perfeição.</span></h1>
+        <p class="subheadline reveal reveal-delay-2">A The Table Bianchi oferece catering sob medida para eventos corporativos de alto nível em todo o Reino Unido. De jantares executivos a recepções com investidores, entregamos precisão, discrição e excelência gastronômica — para que o seu evento reflita o padrão que o seu negócio exige.</p>
+        <a href="#contact-pt" class="btn-primary reveal reveal-delay-3">Solicite um Orçamento</a>
+    </section>
+
+    <div class="particle-line" data-lang="pt"></div>
+
+    <!-- S02 Pain PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal">O Desafio</div>
+        <h2 class="headline headline--section reveal">Você Sabe o Peso de Cada Detalhe.<br>Nós Também.</h2>
+        <p class="reveal reveal-delay-1" style="max-width:720px; color:var(--text-dim); margin-bottom:24px;">Organizar um evento corporativo carrega responsabilidade. Cada detalhe envia uma mensagem — para investidores, parceiros, clientes e stakeholders. E, ainda assim, encontrar um parceiro de catering que compreenda verdadeiramente essa pressão é surpreendentemente difícil.</p>
+        <ul class="pain-list reveal reveal-delay-2">
+            <li>Fornecedores de catering que tratam um jantar de diretoria da mesma forma que uma festa de aniversário</li>
+            <li>Equipe de serviço sem a discrição e o profissionalismo que o seu ambiente exige</li>
+            <li>Cardápios genéricos, sem inspiração ou desalinhados com o tom do evento</li>
+            <li>Falhas operacionais de última hora que colocam a reputação da empresa em risco</li>
+            <li>Fornecedores que exigem supervisão constante — adicionando trabalho em vez de eliminá-lo</li>
+            <li>Coordenação logística que desmorona sob pressão</li>
+        </ul>
+        <p class="reveal reveal-delay-3" style="margin-top:32px; font-size:1.05rem; color:#fff;">Na hospitalidade corporativa, não há margem para erro. O seu evento não é apenas uma reunião — é uma extensão da sua marca, da sua credibilidade e da sua liderança.</p>
+    </section>
+
+    <div class="section-divider" data-lang="pt"></div>
+
+    <!-- S03 Origin PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal">Nossa História</div>
+        <h2 class="headline headline--section reveal">Por Que a The Table Bianchi Existe</h2>
+        <div class="gold-line reveal"></div>
+        <p class="reveal reveal-delay-1" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">A The Table Bianchi foi fundada com uma única convicção: a hospitalidade corporativa merece o mesmo rigor, estratégia e atenção aos detalhes que as decisões de negócio tomadas ao redor da mesa.</p>
+        <p class="reveal reveal-delay-2" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">Com demasiada frequência, o catering é tratado como um detalhe secundário. Identificamos uma oportunidade de mudar isso. De construir um serviço que opera com a disciplina de um parceiro corporativo e a arte de uma cozinha de alta gastronomia.</p>
+        <p class="reveal reveal-delay-3" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">O nosso nome carrega intenção. <strong style="color:var(--gold)">"The Table"</strong> representa o espaço onde decisões são tomadas, relações são construídas e confiança é conquistada. <strong style="color:var(--gold)">"Bianchi"</strong> reflete o nosso compromisso com a clareza e a confiança discreta que define tudo o que fazemos.</p>
+        <p class="reveal reveal-delay-4" style="max-width:720px; color:#fff; font-size:1.05rem; margin-top:32px;">Não somos simplesmente uma empresa de catering. Somos o braço de hospitalidade do seu negócio.</p>
+    </section>
+
+    <div class="particle-line" data-lang="pt"></div>
+
+    <!-- S04 Services PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal">Nossos Serviços</div>
+        <h2 class="headline headline--section reveal">Adaptado a Cada<br>Ocasião Corporativa</h2>
+        <p class="subheadline reveal reveal-delay-1">Somos especializados em eventos corporativos de alto nível, onde a qualidade da hospitalidade impacta diretamente a qualidade do resultado.</p>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <h3>Reuniões Executivas</h3>
+                <ul>
+                    <li>Menus refinados para café da manhã, almoço ou tarde</li>
+                    <li>Serviço discreto que não interrompe o fluxo da discussão</li>
+                    <li>Restrições alimentares e culturais tratadas com precisão</li>
+                    <li>Apresentação alinhada à identidade corporativa</li>
+                </ul>
+            </div>
+            <div class="service-card reveal reveal-delay-1">
+                <h3>Eventos com Investidores</h3>
+                <ul>
+                    <li>Cardápios curados para refletir o calibre da audiência</li>
+                    <li>Styling de mesa impecável e coreografia de serviço</li>
+                    <li>Harmonizações estratégicas de comida e bebida</li>
+                    <li>Cada ponto de contato reforça confiança e credibilidade</li>
+                </ul>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <h3>Lançamentos de Produtos</h3>
+                <ul>
+                    <li>Gastronomia que complementa a narrativa da marca</li>
+                    <li>Conceitos criativos de menu alinhados ao tema</li>
+                    <li>Coordenação integrada com a equipe de produção</li>
+                    <li>Escalável de previews íntimas a grandes recepções</li>
+                </ul>
+            </div>
+            <div class="service-card reveal reveal-delay-3">
+                <h3>Jantares Corporativos Privados</h3>
+                <ul>
+                    <li>Experiências de degustação multi-pratos de alta gastronomia</li>
+                    <li>Consultoria de harmonização de vinhos e bebidas</li>
+                    <li>Cartões de menu personalizados e design de mesa</li>
+                    <li>Atmosfera de exclusividade e sofisticação</li>
+                </ul>
+            </div>
+            <div class="service-card reveal reveal-delay-4">
+                <h3>Eventos de Networking</h3>
+                <ul>
+                    <li>Menus de canapés pensados para fluidez e conversação</li>
+                    <li>Estações ao vivo e experiências gastronômicas interativas</li>
+                    <li>Serviço desenhado para facilitar conexões</li>
+                    <li>Apresentação elegante que comunica antes de você falar</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="pt"></div>
+
+    <!-- S05 Pillars PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal" style="text-align:center">Nosso Padrão</div>
+        <h2 class="headline headline--section reveal" style="text-align:center">Três Pilares. Um Único Padrão.</h2>
+        <p class="subheadline reveal reveal-delay-1" style="text-align:center; margin:0 auto 48px;">Tudo o que entregamos é construído sobre três princípios inegociáveis.</p>
+        <div class="pillars">
+            <div class="pillar reveal">
+                <div class="pillar-number">I</div>
+                <h3>Precisão</h3>
+                <p>Operamos com a disciplina que o seu negócio espera. Cada cronograma meticulosamente planejado. Cada detalhe — da temperatura da comida ao alinhamento dos talheres — considerado.</p>
+            </div>
+            <div class="pillar reveal reveal-delay-1">
+                <div class="pillar-number">II</div>
+                <h3>Discrição</h3>
+                <p>A nossa equipe é treinada em etiqueta corporativa e conduta profissional. Lemos o ambiente. Servimos sem sermos vistos e resolvemos problemas antes que surjam.</p>
+            </div>
+            <div class="pillar reveal reveal-delay-2">
+                <div class="pillar-number">III</div>
+                <h3>Distinção</h3>
+                <p>Cada cardápio desenvolvido do zero. Ingredientes premium, técnica refinada, elegância intencional. Desenhado para refletir o padrão do seu negócio.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="particle-line" data-lang="pt"></div>
+
+    <!-- S06 Steps PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal">O Processo</div>
+        <h2 class="headline headline--section reveal">A Sua Experiência Connosco</h2>
+        <p class="subheadline reveal reveal-delay-1">Do primeiro contato à despedida final, cada etapa é conduzida com cuidado, clareza e profissionalismo.</p>
+        <div class="steps">
+            <div class="step reveal">
+                <div class="step-number">01</div>
+                <div>
+                    <h3>Consultoria Estratégica</h3>
+                    <p>Começamos com uma conversa detalhada sobre o seu evento — objetivos, perfil da audiência, local, considerações alimentares. Isto não é uma chamada de vendas. É um briefing estratégico.</p>
+                </div>
+            </div>
+            <div class="step reveal reveal-delay-1">
+                <div class="step-number">02</div>
+                <div>
+                    <h3>Cardápio Sob Medida</h3>
+                    <p>A nossa equipe culinária desenha um cardápio personalizado. Cada prato selecionado com propósito — sabor, apresentação, sazonalidade. Você revisa, refina e aprova.</p>
+                </div>
+            </div>
+            <div class="step reveal reveal-delay-2">
+                <div class="step-number">03</div>
+                <div>
+                    <h3>Logística e Planejamento</h3>
+                    <p>Cuidamos de cada detalhe operacional: sourcing, cronogramas, equipamentos, equipe, transporte e coordenação com o local. Um plano detalhado partilhado com antecedência.</p>
+                </div>
+            </div>
+            <div class="step reveal reveal-delay-3">
+                <div class="step-number">04</div>
+                <div>
+                    <h3>Execução Impecável</h3>
+                    <p>No dia, a nossa equipe chega antes do horário. Montagem com precisão. Serviço entregue de forma contínua. O nosso coordenador gere cada detalhe.</p>
+                </div>
+            </div>
+            <div class="step reveal reveal-delay-4">
+                <div class="step-number">05</div>
+                <div>
+                    <h3>Partida Discreta</h3>
+                    <p>Desmontagem completa, limpeza e saída geridas silenciosamente. O espaço devolvido exatamente como estava — ou melhor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="pt"></div>
+
+    <!-- S07 For You PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal">Qualificação</div>
+        <h2 class="headline headline--section reveal">A The Table Bianchi<br>É Para Você?</h2>
+        <div class="for-you-grid">
+            <div class="for-you-col for-you-col--yes reveal">
+                <h3>A The Table Bianchi é para você se:</h3>
+                <ul>
+                    <li>Organiza eventos corporativos onde a reputação está em jogo</li>
+                    <li>Precisa de um parceiro com o mesmo profissionalismo que o seu negócio</li>
+                    <li>Valoriza discrição, precisão e confiabilidade acima de tudo</li>
+                    <li>Os seus eventos envolvem executivos seniores, investidores ou membros de conselho</li>
+                    <li>Espera um serviço sob medida — não pacotes padronizados</li>
+                    <li>Acredita que hospitalidade é uma ferramenta estratégica</li>
+                    <li>Está baseado no Reino Unido ou organiza eventos em território britânico</li>
+                </ul>
+            </div>
+            <div class="for-you-col for-you-col--no reveal reveal-delay-1">
+                <h3>Pode não ser a opção ideal se:</h3>
+                <ul>
+                    <li>Procura a opção de catering mais barata disponível</li>
+                    <li>Prefere menus padronizados sem personalização</li>
+                    <li>O seu evento não exige um nível premium de serviço</li>
+                    <li>Prefere gerir a logística de catering internamente</li>
+                </ul>
+            </div>
+        </div>
+        <p class="reveal" style="margin-top:40px; color:var(--text-dim); font-style:italic;">Somos seletivos com os eventos que aceitamos — porque o nosso padrão exige isso.</p>
+    </section>
+
+    <div class="particle-line" data-lang="pt"></div>
+
+    <!-- S08 Testimonials PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal">Depoimentos</div>
+        <h2 class="headline headline--section reveal">O Que Os Nossos Clientes Dizem</h2>
+        <p class="subheadline reveal reveal-delay-1">Confiança de equipas corporativas em todo o Reino Unido.</p>
+        <div class="testimonials-grid">
+            <div class="testimonial reveal">
+                <blockquote>Contratamos a The Table Bianchi para o nosso jantar anual com investidores na City. O nível de detalhe foi extraordinário — do cardápio à apresentação da mesa ao serviço impecável. Vários membros do conselho comentaram sobre a qualidade.</blockquote>
+                <cite>Victoria Ashworth<span>Diretora de Assuntos Corporativos, Whitmore &amp; Partners LLP, Londres</span></cite>
+            </div>
+            <div class="testimonial reveal reveal-delay-1">
+                <blockquote>O que mais nos impressionou foi o profissionalismo. A equipe chegou cedo, executou sem um único problema e partiu sem que notássemos. A The Table Bianchi compreende o ambiente corporativo de uma forma que poucos fornecedores conseguem.</blockquote>
+                <cite>James Harrington<span>Diretor Geral, Harrington Capital Group, Manchester</span></cite>
+            </div>
+            <div class="testimonial reveal reveal-delay-2">
+                <blockquote>Trabalharam de perto com a nossa equipe de marketing para criar um cardápio que refletisse a identidade da marca. O feedback dos participantes foi extremamente positivo. Altamente recomendado.</blockquote>
+                <cite>Priya Kaur<span>Gestora Sênior de Eventos, NovaTech Solutions, Londres</span></cite>
+            </div>
+            <div class="testimonial reveal reveal-delay-3">
+                <blockquote>Organizar um jantar privado para 40 convidados C-suite não é uma tarefa que tomo de forma leve. A The Table Bianchi tornou todo o processo simples. São o nosso único parceiro de catering daqui em diante.</blockquote>
+                <cite>Richard Caldwell<span>Diretor de Operações, Sterling &amp; Moore Advisory, Edimburgo</span></cite>
+            </div>
+            <div class="testimonial reveal">
+                <blockquote>Discrição é inegociável na nossa área. A The Table Bianchi entregou exatamente isso — além de comida extraordinária, pontualidade impecável e uma equipe com o máximo profissionalismo.</blockquote>
+                <cite>Eleanor Griffiths<span>Sócia, Chambers &amp; Westbrook Solicitors, Birmingham</span></cite>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="pt"></div>
+
+    <!-- S09 About PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal">Sobre</div>
+        <h2 class="headline headline--section reveal">A Equipe Por Trás da Mesa</h2>
+        <div class="gold-line reveal"></div>
+        <p class="reveal reveal-delay-1" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">A The Table Bianchi é liderada por uma equipe de profissionais de culinária e hospitalidade com vasta experiência em alta gastronomia, eventos corporativos e ambientes de serviço de luxo.</p>
+        <p class="reveal reveal-delay-2" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">O nosso fundador construiu a The Table Bianchi com uma visão clara: preencher a lacuna entre uma gastronomia excepcional e as exigências rigorosas do mundo corporativo.</p>
+        <p class="reveal reveal-delay-3" style="max-width:720px; color:var(--text-dim); margin-bottom:20px;">Não acreditamos em equipe temporária ou terceirizada. Quando trabalha com a The Table Bianchi, trabalha com as nossas pessoas — indivíduos que compreendem os nossos padrões e os representam em cada evento.</p>
+        <ul class="about-commitments reveal reveal-delay-4">
+            <li>Equipe culinária treinada em técnica de alta gastronomia e seleção de ingredientes premium</li>
+            <li>Equipe de atendimento selecionada por compostura, discrição e profissionalismo</li>
+            <li>Coordenadores no local com experiência em ambientes corporativos de alta pressão</li>
+            <li>Desenvolvimento contínuo em segurança alimentar, gestão de alérgenos e inovação</li>
+        </ul>
+    </section>
+
+    <div class="particle-line" data-lang="pt"></div>
+
+    <!-- S10 FAQ PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal">FAQ</div>
+        <h2 class="headline headline--section reveal">Perguntas Frequentes</h2>
+        <div class="faq-list reveal reveal-delay-1">
+            <div class="faq-item">
+                <button class="faq-question">Com quanta antecedência devo reservar?</button>
+                <div class="faq-answer"><p>Recomendamos um mínimo de três semanas de antecedência para a maioria dos eventos. Para ocasiões de grande escala ou períodos de pico, quatro a seis semanas é o ideal. Entre em contato e faremos o possível para acomodar o seu cronograma.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Atendem restrições alimentares e alergias?</button>
+                <div class="faq-answer"><p>Sem dúvida. Cada cardápio considera necessidades alimentares, alergias e preferências culturais. Realizamos um briefing detalhado durante a consultoria para garantir que cada convidado seja atendido com o mesmo padrão.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Que regiões do Reino Unido atendem?</button>
+                <div class="faq-answer"><p>Operamos em todo o Reino Unido, com cobertura principal em Londres, Sudeste, Manchester, Birmingham, Edimburgo e regiões circundantes. Para eventos fora destas áreas, consulte-nos.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Podem trabalhar com o nosso organizador de eventos?</button>
+                <div class="faq-answer"><p>Sim. Coordenamos regularmente com organizadores de eventos corporativos, gestores de espaços e equipas de produção. O nosso processo integra-se de forma contínua aos seus arranjos existentes.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">O que está incluído no serviço?</button>
+                <div class="faq-answer"><p>Consultoria estratégica, desenvolvimento de cardápio sob medida, produção gastronômica premium, logística completa, equipe profissional, styling de mesa, coordenação no local e desmontagem pós-evento.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Como funciona a estrutura de preços?</button>
+                <div class="faq-answer"><p>Os preços são personalizados com base no escopo do evento. Após a consulta inicial, fornecemos uma proposta detalhada e transparente, sem custos ocultos.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Oferecem degustações antes do evento?</button>
+                <div class="faq-answer"><p>Sim. Para eventos maiores ou parcerias de longo prazo, oferecemos uma sessão de degustação privada incluída no processo de planejamento para eventos qualificados.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">O que diferencia a The Table Bianchi?</button>
+                <div class="faq-answer"><p>Operamos como parceiro estratégico de hospitalidade. O nosso serviço é construído em torno dos seus objetivos de negócio, entregue com precisão e discrição. Tudo é sob medida, interno e mantido no mais alto padrão.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="pt"></div>
+
+    <!-- S11 Final CTA PT -->
+    <section class="final-cta" data-lang="pt" id="contact-pt">
+        <div class="section-label reveal">Próximo Passo</div>
+        <h2 class="headline headline--hero reveal" style="margin-bottom:28px;">O Seu Próximo Evento<br><span class="shimmer">Merece Mais.</span></h2>
+        <p class="subheadline reveal reveal-delay-1">Seja um café da manhã executivo para dez pessoas ou um jantar de gala para duzentas, a The Table Bianchi traz a precisão, discrição e excelência gastronômica que o seu negócio exige.</p>
+        <p class="reveal reveal-delay-2" style="color:var(--text-dim); max-width:600px; font-size:0.92rem; margin-bottom:24px;">Trabalhamos com um número limitado de clientes por mês. Sem compromisso. Sem pressão. Simplesmente uma consultoria profissional.</p>
+        <div class="reveal reveal-delay-3" style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+            <a href="mailto:enquiries@thetablebianchi.co.uk" class="btn-primary">Solicite uma Consultoria</a>
+            <a href="tel:+442079460321" class="btn-secondary">Ou ligue: +44 (0)20 7946 0321</a>
+        </div>
+    </section>
+
+    <!-- S12 Footer PT -->
+    <footer class="footer" data-lang="pt">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>The Table Bianchi</h4>
+                <p>Catering Corporativo &amp; Hospitalidade</p>
+                <p style="margin-top:12px; font-size:0.8rem; color:#444;">&copy; 2026 The Table Bianchi Ltd.<br>Todos os direitos reservados.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <a href="mailto:enquiries@thetablebianchi.co.uk">enquiries@thetablebianchi.co.uk</a>
+                <a href="tel:+442079460321">+44 (0)20 7946 0321</a>
+            </div>
+            <div class="footer-col">
+                <h4>Endereço</h4>
+                <p>The Table Bianchi Ltd.</p>
+                <p>47 King William Street</p>
+                <p>London, EC4R 9AF</p>
+                <p>Reino Unido</p>
+            </div>
+            <div class="footer-col">
+                <h4>Conecte-se</h4>
+                <a href="#">Instagram: @thetablebianchi</a>
+                <a href="#">LinkedIn: The Table Bianchi</a>
+                <p style="margin-top:12px; font-size:0.78rem; color:#444;">Seg-Sex: 08:00 - 18:00<br>Sáb: Sob agendamento</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            Registada em Inglaterra e País de Gales. Número da empresa: 14829365.
+        </div>
+    </footer>
+
+
+    <script>
+        // ===== LANGUAGE SWITCH =====
+        function switchLang(lang) {
+            document.body.classList.toggle('lang-pt', lang === 'pt');
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.target === lang);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Re-trigger reveal for newly visible elements
+            setTimeout(() => observeAll(), 300);
+        }
+
+        // ===== CURSOR LIGHT =====
+        const cursorLight = document.getElementById('cursorLight');
+        document.addEventListener('mousemove', (e) => {
+            cursorLight.style.left = e.clientX + 'px';
+            cursorLight.style.top = e.clientY + 'px';
+        });
+
+        // ===== SCROLL REVEAL =====
+        function observeAll() {
+            const reveals = document.querySelectorAll('.reveal, .gold-line');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+            reveals.forEach(el => {
+                // Only observe visible elements (not hidden by lang toggle)
+                if (el.offsetParent !== null || el.closest('[data-lang]') === null) {
+                    observer.observe(el);
+                }
+            });
+        }
+        observeAll();
+
+        // ===== FAQ ACCORDION =====
+        document.querySelectorAll('.faq-question').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const wasOpen = item.classList.contains('open');
+                // Close all in same section
+                item.closest('.faq-list').querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        // ===== NAV HIDE ON SCROLL =====
+        let lastScroll = 0;
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
