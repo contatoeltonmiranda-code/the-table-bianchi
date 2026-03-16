@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Table Bianchi — Corporate Catering & Hospitality</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --gold: #c9a96e;
+            --gold-light: #e0c68a;
+            --gold-dim: rgba(201,169,110,0.15);
+            --bg: #0a0a0a;
+            --bg-section: #0f0f0f;
+            --bg-card: #141414;
+            --text: #e8e8e8;
+            --text-dim: #999;
+            --border: rgba(201,169,110,0.2);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* ===== LIGHT EFFECTS ===== */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(120px);
+            opacity: 0.08;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+        .glow-orb--1 { width: 600px; height: 600px; background: var(--gold); top: -200px; left: -200px; animation-delay: 0s; }
+        .glow-orb--2 { width: 500px; height: 500px; background: #fff; bottom: -150px; right: -150px; animation-delay: -7s; }
+        .glow-orb--3 { width: 400px; height: 400px; background: var(--gold); top: 50%; left: 50%; animation-delay: -14s; }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(80px, -60px) scale(1.1); }
+            66% { transform: translate(-60px, 80px) scale(0.9); }
+        }
+
+        /* ===== CURSOR LIGHT ===== */
+        .cursor-light {
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201,169,110,0.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+
+        /* ===== LANGUAGE TOGGLE ===== */
+        .lang-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 1000;
+            display: flex;
+            gap: 0;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,10,0.85);
+        }
+        .lang-btn {
+            padding: 10px 22px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            background: transparent;
+            color: var(--text-dim);
+            transition: all 0.4s ease;
+        }
+        .lang-btn.active {
+            background: var(--gold);
+            color: #0a0a0a;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,10,0.7);
+            border-bottom: 1px solid rgba(201,169,110,0.08);
+            transition: transform 0.4s;
+        }
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+        .nav-cta {
+            padding: 10px 28px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            cursor: pointer;
+            transition: all 0.4s;
+            text-decoration: none;
+        }
+        .nav-cta:hover {
+            background: var(--gold);
+            color: #0a0a0a;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            position: relative;
+            z-index: 2;
+            padding: 120px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ===== REVEAL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.15s; }
+        .reveal-delay-2 { transition-delay: 0.3s; }
+        .reveal-delay-3 { transition-delay: 0.45s; }
+        .reveal-delay-4 { transition-delay: 0.6s; }
+
+        /* ===== TYPOGRAPHY ===== */
+        .headline {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        .headline--hero {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            color: #fff;
+            margin-bottom: 28px;
+        }
+        .headline--section {
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .subheadline {
+            font-size: clamp(1rem, 1.4vw, 1.15rem);
+            color: var(--text-dim);
+            max-width: 720px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+        .section-label {
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding-top: 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center bottom, rgba(201,169,110,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero .subheadline { margin: 0 auto 48px; }
+
+        /* ===== GOLD LINE ===== */
+        .gold-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 0 auto 40px;
+            opacity: 0;
+            transform: scaleX(0);
+            transition: all 1s ease 0.3s;
+        }
+        .gold-line.visible {
+            opacity: 1;
+            transform: scaleX(1);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            display: inline-block;
+            padding: 16px 48px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            background: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: color 0.4s, border-color 0.4s;
+        }
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: var(--gold);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+        .btn-primary:hover {
+            color: #0a0a0a;
+            border-color: var(--gold);
+        }
+        .btn-primary:hover::before { left: 0; }
+
+        .btn-secondary {
+            display: inline-block;
+            margin-top: 16px;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        .btn-secondary:hover { color: var(--gold); }
+
+        /* ===== CARDS GRID ===== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 48px 32px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.4s, transform 0.4s;
+            text-align: center;
+        }
+        .service-card:hover {
+            border-color: var(--border);
+            transform: translateY(-4px);
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+        .service-card:hover::before { opacity: 1; }
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: #fff;
+            margin-bottom: 18px;
+            font-weight: 600;
+        }
+        .service-card p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.8;
+        }
+
+        /* ===== APPROACH ===== */
+        .approach-section {
+            text-align: center;
+            padding: 140px 40px;
+        }
+        .approach-section .headline--section {
+            margin-bottom: 24px;
+        }
+        .approach-body {
+            max-width: 640px;
+            margin: 0 auto;
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            line-height: 1.9;
+        }
+
+        /* ===== STORY ===== */
+        .story-section {
+            padding: 120px 40px;
+        }
+        .story-text {
+            max-width: 720px;
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.9;
+            margin-bottom: 20px;
+        }
+        .story-text:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 160px 40px;
+            position: relative;
+        }
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(201,169,110,0.06) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .final-cta .subheadline {
+            max-width: 640px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 16px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 60px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+        .footer p {
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            line-height: 2;
+        }
+        .footer a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer a:hover { color: var(--gold-light); }
+        .footer-bottom {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            font-size: 0.78rem;
+            color: #555;
+        }
+
+        /* ===== SEPARATOR ===== */
+        .section-divider {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201,169,110,0.2), transparent);
+        }
+
+        /* ===== SHIMMER TEXT ===== */
+        .shimmer {
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 40%, #fff 50%, var(--gold-light) 60%, var(--gold) 100%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 4s linear infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* ===== PARTICLE LINE ===== */
+        .particle-line {
+            position: relative;
+            height: 1px;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+            overflow: visible;
+        }
+        .particle-line::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+            filter: blur(1px);
+            animation: particleSlide 6s ease-in-out infinite;
+            box-shadow: 0 0 10px var(--gold), 0 0 30px rgba(201,169,110,0.3);
+        }
+        @keyframes particleSlide {
+            0%, 100% { left: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: calc(100% - 40px); opacity: 0; }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            section { padding: 80px 24px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .nav { padding: 16px 20px; }
+            .lang-toggle { top: 16px; right: 16px; }
+            .lang-btn { padding: 8px 14px; font-size: 0.7rem; }
+            .hero { padding-top: 100px; }
+            .final-cta { padding: 100px 24px; }
+            .approach-section { padding: 100px 24px; }
+            .story-section { padding: 80px 24px; }
+        }
+
+        /* ===== LANG DISPLAY ===== */
+        [data-lang="pt"] { display: none; }
+        body.lang-pt [data-lang="en"] { display: none; }
+        body.lang-pt [data-lang="pt"] { display: block; }
+        body.lang-pt .hero[data-lang="pt"],
+        body.lang-pt .final-cta[data-lang="pt"] {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <!-- Ambient Light Orbs -->
+    <div class="glow-orb glow-orb--1"></div>
+    <div class="glow-orb glow-orb--2"></div>
+    <div class="glow-orb glow-orb--3"></div>
+    <div class="cursor-light" id="cursorLight"></div>
+
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button class="lang-btn active" data-target="en" onclick="switchLang('en')">EN</button>
+        <button class="lang-btn" data-target="pt" onclick="switchLang('pt')">PT</button>
+    </div>
+
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-logo">THE TABLE BIANCHI</div>
+        <a href="#contact" class="nav-cta" data-lang="en">Get in Touch</a>
+        <a href="#contact" class="nav-cta" data-lang="pt">Entre em Contato</a>
+    </nav>
+
+    <!-- ==================== ENGLISH ==================== -->
+
+    <!-- S01 Hero -->
+    <section class="hero" data-lang="en">
+        <div class="section-label reveal">Corporate Catering &amp; Hospitality</div>
+        <h1 class="headline headline--hero reveal reveal-delay-1"><span class="shimmer">Beyond the Catering</span></h1>
+        <p class="subheadline reveal reveal-delay-2">The Table Bianchi delivers bespoke catering and corporate hospitality for executive meetings, private dinners and corporate events throughout London.</p>
+        <p class="reveal reveal-delay-3" style="max-width:640px; color:var(--text-dim); font-size:0.95rem; margin-bottom:40px; text-align:center;">We create refined food experiences supported by professional service, thoughtful presentation and seamless event execution.</p>
+        <a href="#contact" class="btn-primary reveal reveal-delay-4">Get in Touch</a>
+    </section>
+
+    <div class="particle-line" data-lang="en"></div>
+
+    <!-- S02 Services -->
+    <section data-lang="en">
+        <div class="section-label reveal">What We Do</div>
+        <h2 class="headline headline--section reveal">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <h3>Corporate Catering</h3>
+                <p>Bespoke catering for meetings, corporate receptions, networking events and business lunches.</p>
+            </div>
+            <div class="service-card reveal reveal-delay-1">
+                <h3>Private Dining</h3>
+                <p>Elegant dining experiences for private dinners, executive gatherings and special occasions.</p>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <h3>All Occasions</h3>
+                <p>Tailored catering for a variety of events, from intimate gatherings to larger celebrations.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="en"></div>
+
+    <!-- S03 Approach -->
+    <section class="approach-section" data-lang="en">
+        <div class="section-label reveal">How We Work</div>
+        <h2 class="headline headline--section reveal">Our Approach</h2>
+        <div class="gold-line reveal"></div>
+        <p class="reveal reveal-delay-1" style="max-width:640px; margin:0 auto 16px; font-size:1.15rem; color:#fff; font-family:'Playfair Display',serif;">Every event is unique.</p>
+        <p class="approach-body reveal reveal-delay-2">Our menus are designed specifically for each occasion, combining seasonal ingredients, elegant presentation and professional service.</p>
+    </section>
+
+    <div class="particle-line" data-lang="en"></div>
+
+    <!-- S04 Story -->
+    <section class="story-section" data-lang="en">
+        <div class="section-label reveal">Our Story</div>
+        <h2 class="headline headline--section reveal">The Story</h2>
+        <div class="gold-line reveal"></div>
+        <p class="story-text reveal reveal-delay-1">The Table Bianchi was founded with a simple idea: hospitality should go beyond catering.</p>
+        <p class="story-text reveal reveal-delay-2">The name reflects the heritage of Chef Guilherme "Gui" Bianchi, whose family roots come from Northern Italy — a place where food, family and the table are deeply connected.</p>
+        <p class="story-text reveal reveal-delay-3">Chef Gui grew up surrounded by the traditions of Italian cooking, where meals are about bringing people together and creating memorable moments.</p>
+        <p class="story-text reveal reveal-delay-4">Over the years, he built his career working in catering, private dining and corporate events, gaining experience in different countries before establishing The Table Bianchi in London.</p>
+        <p class="story-text reveal" style="transition-delay:0.75s;">His approach is simple: great food, carefully prepared, served with professionalism and attention to every detail.</p>
+        <p class="reveal" style="transition-delay:0.9s; max-width:720px; font-size:1.05rem; color:#fff; margin-top:32px;">This philosophy is at the heart of The Table Bianchi.</p>
+    </section>
+
+    <div class="section-divider" data-lang="en"></div>
+
+    <!-- S05 Final CTA -->
+    <section class="final-cta" data-lang="en" id="contact">
+        <div class="section-label reveal">Next Step</div>
+        <h2 class="headline headline--hero reveal" style="margin-bottom:28px;"><span class="shimmer">Beyond the Catering</span></h2>
+        <p class="subheadline reveal reveal-delay-1">Hospitality designed around your event.</p>
+        <div class="reveal reveal-delay-2" style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+            <a href="mailto:enquiries@thetablebianchi.co.uk" class="btn-primary">Get in Touch</a>
+        </div>
+    </section>
+
+    <!-- ==================== PORTUGUESE ==================== -->
+
+    <!-- S01 Hero PT -->
+    <section class="hero" data-lang="pt">
+        <div class="section-label reveal">Catering Corporativo e Hospitalidade</div>
+        <h1 class="headline headline--hero reveal reveal-delay-1"><span class="shimmer">Além do Catering</span></h1>
+        <p class="subheadline reveal reveal-delay-2">A The Table Bianchi oferece catering sob medida e hospitalidade corporativa para reuniões executivas, jantares privados e eventos corporativos em toda Londres.</p>
+        <p class="reveal reveal-delay-3" style="max-width:640px; color:var(--text-dim); font-size:0.95rem; margin-bottom:40px; text-align:center;">Criamos experiências gastronômicas refinadas sustentadas por um serviço profissional, apresentação cuidadosa e execução impecável de eventos.</p>
+        <a href="#contact" class="btn-primary reveal reveal-delay-4">Entre em Contato</a>
+    </section>
+
+    <div class="particle-line" data-lang="pt"></div>
+
+    <!-- S02 Services PT -->
+    <section data-lang="pt">
+        <div class="section-label reveal">O Que Fazemos</div>
+        <h2 class="headline headline--section reveal">Nossos Serviços</h2>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <h3>Catering Corporativo</h3>
+                <p>Catering sob medida para reuniões, recepções corporativas, eventos de networking e almoços de negócios.</p>
+            </div>
+            <div class="service-card reveal reveal-delay-1">
+                <h3>Jantares Privados</h3>
+                <p>Experiências gastronômicas elegantes para jantares privados, encontros executivos e ocasiões especiais.</p>
+            </div>
+            <div class="service-card reveal reveal-delay-2">
+                <h3>Todas as Ocasiões</h3>
+                <p>Catering personalizado para uma variedade de eventos, de encontros íntimos a celebrações maiores.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider" data-lang="pt"></div>
+
+    <!-- S03 Approach PT -->
+    <section class="approach-section" data-lang="pt">
+        <div class="section-label reveal">Como Trabalhamos</div>
+        <h2 class="headline headline--section reveal">Nossa Abordagem</h2>
+        <div class="gold-line reveal"></div>
+        <p class="reveal reveal-delay-1" style="max-width:640px; margin:0 auto 16px; font-size:1.15rem; color:#fff; font-family:'Playfair Display',serif;">Cada evento é único.</p>
+        <p class="approach-body reveal reveal-delay-2">Nossos cardápios são criados especificamente para cada ocasião, combinando ingredientes sazonais, apresentação elegante e serviço profissional.</p>
+    </section>
+
+    <div class="particle-line" data-lang="pt"></div>
+
+    <!-- S04 Story PT -->
+    <section class="story-section" data-lang="pt">
+        <div class="section-label reveal">Nossa História</div>
+        <h2 class="headline headline--section reveal">A História</h2>
+        <div class="gold-line reveal"></div>
+        <p class="story-text reveal reveal-delay-1">A The Table Bianchi foi fundada com uma ideia simples: hospitalidade deve ir além do catering.</p>
+        <p class="story-text reveal reveal-delay-2">O nome reflete a herança do Chef Guilherme "Gui" Bianchi, cujas raízes familiares vêm do Norte da Itália — um lugar onde comida, família e a mesa estão profundamente conectados.</p>
+        <p class="story-text reveal reveal-delay-3">Chef Gui cresceu cercado pelas tradições da culinária italiana, onde as refeições são sobre reunir pessoas e criar momentos memoráveis.</p>
+        <p class="story-text reveal reveal-delay-4">Ao longo dos anos, ele construiu sua carreira trabalhando com catering, jantares privados e eventos corporativos, adquirindo experiência em diferentes países antes de estabelecer a The Table Bianchi em Londres.</p>
+        <p class="story-text reveal" style="transition-delay:0.75s;">Sua abordagem é simples: boa comida, preparada com cuidado, servida com profissionalismo e atenção a cada detalhe.</p>
+        <p class="reveal" style="transition-delay:0.9s; max-width:720px; font-size:1.05rem; color:#fff; margin-top:32px;">Essa filosofia está no coração da The Table Bianchi.</p>
+    </section>
+
+    <div class="section-divider" data-lang="pt"></div>
+
+    <!-- S05 Final CTA PT -->
+    <section class="final-cta" data-lang="pt" id="contact-pt">
+        <div class="section-label reveal">Próximo Passo</div>
+        <h2 class="headline headline--hero reveal" style="margin-bottom:28px;"><span class="shimmer">Além do Catering</span></h2>
+        <p class="subheadline reveal reveal-delay-1">Hospitalidade pensada em torno do seu evento.</p>
+        <div class="reveal reveal-delay-2" style="display:flex; flex-direction:column; align-items:center; gap:16px;">
+            <a href="mailto:enquiries@thetablebianchi.co.uk" class="btn-primary">Entre em Contato</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">THE TABLE BIANCHI</div>
+        <p data-lang="en">Corporate Catering &amp; Hospitality — London</p>
+        <p data-lang="pt">Catering Corporativo e Hospitalidade — Londres</p>
+        <p style="margin-top:8px;"><a href="mailto:enquiries@thetablebianchi.co.uk">enquiries@thetablebianchi.co.uk</a></p>
+        <div class="footer-bottom">&copy; 2026 The Table Bianchi. All rights reserved.</div>
+    </footer>
+
+    <script>
+        /* Language Switch */
+        function switchLang(lang) {
+            if (lang === 'pt') {
+                document.body.classList.add('lang-pt');
+            } else {
+                document.body.classList.remove('lang-pt');
+            }
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.toggle('active', b.dataset.target === lang);
+            });
+            // Re-trigger reveal for newly visible elements
+            setTimeout(() => {
+                document.querySelectorAll('.reveal').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.92) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 50);
+        }
+
+        /* Scroll Reveal */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal, .gold-line').forEach(el => observer.observe(el));
+
+        /* Cursor Light */
+        const cursorLight = document.getElementById('cursorLight');
+        document.addEventListener('mousemove', e => {
+            cursorLight.style.left = e.clientX + 'px';
+            cursorLight.style.top = e.clientY + 'px';
+        });
+
+        /* Nav Hide on Scroll */
+        let lastScroll = 0;
+        const nav = document.querySelector('.nav');
+        window.addEventListener('scroll', () => {
+            const current = window.scrollY;
+            if (current > lastScroll && current > 100) {
+                nav.style.transform = 'translateY(-100%)';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScroll = current;
+        });
+    </script>
+</body>
+</html>
