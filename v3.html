@@ -564,11 +564,13 @@
     .scroll-arrow {
       position: absolute;
       bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
       z-index: 2;
       opacity: 0;
-      animation: heroFadeUp 0.8s 1.2s forwards;
+      animation: heroFadeIn 0.8s 1.2s forwards;
     }
 
     .scroll-arrow a {
@@ -581,6 +583,12 @@
       height: 28px;
       stroke: var(--gold);
       animation: bounce 2s infinite;
+    }
+
+    @keyframes heroFadeIn {
+      to {
+        opacity: 1;
+      }
     }
 
     @keyframes heroFadeUp {
@@ -718,14 +726,16 @@
       border: 1px solid rgba(201,169,110,0.15);
     }
 
-    .gallery-item img {
+    .gallery-item img,
+    .gallery-item video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.6s ease;
     }
 
-    .gallery-item:hover img {
+    .gallery-item:hover img,
+    .gallery-item:hover video {
       transform: scale(1.06);
     }
 
@@ -1506,7 +1516,7 @@
         <img src="fotos/dish-duck-confit.jpg" alt="Duck confit with red cabbage and microgreens" loading="lazy">
       </div>
       <div class="gallery-item reveal">
-        <img src="fotos/dish-oysters-caviar.jpg" alt="Gratineed oysters with caviar" loading="lazy">
+        <video src="fotos/video-01.mp4" autoplay muted loop playsinline></video>
       </div>
       <div class="gallery-item reveal">
         <img src="fotos/chef-gui-seasoning.jpg" alt="Chef Gui Bianchi seasoning a dish" loading="lazy">
@@ -1515,10 +1525,22 @@
         <img src="fotos/dish-seafood-pumpkin.jpg" alt="Seafood served in roasted pumpkin" loading="lazy">
       </div>
       <div class="gallery-item reveal">
+        <video src="fotos/video-02.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="fotos/dish-oysters-caviar.jpg" alt="Gratineed oysters with caviar" loading="lazy">
+      </div>
+      <div class="gallery-item reveal">
+        <video src="fotos/video-03.mp4" autoplay muted loop playsinline></video>
+      </div>
+      <div class="gallery-item reveal">
         <img src="fotos/dish-paella.jpg" alt="Traditional seafood paella" loading="lazy">
       </div>
       <div class="gallery-item reveal">
         <img src="fotos/chef-pepper-grinder.jpg" alt="Chef Gui using pepper grinder" loading="lazy">
+      </div>
+      <div class="gallery-item reveal">
+        <img src="fotos/dish-grilled-vegetables.jpg" alt="Grilled vegetables arrangement" loading="lazy">
       </div>
     </div>
   </section>
