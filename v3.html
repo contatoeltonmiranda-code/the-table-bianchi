@@ -1364,6 +1364,85 @@
         transform: none !important;
       }
     }
+
+    /* ── VIDEO BACKGROUND SECTION ── */
+    .video-bg-section {
+      position: relative;
+      width: 100%;
+      height: 70vh;
+      overflow: hidden;
+    }
+    .video-bg-section video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    .video-bg-section .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(26,42,30,0.3), rgba(26,42,30,0.5));
+      z-index: 1;
+    }
+
+    /* ── VIDEO GALLERY SECTION ── */
+    .video-gallery {
+      background: var(--cream);
+      padding: 80px 5%;
+      text-align: center;
+    }
+    .video-gallery .section-label {
+      color: var(--gold);
+      font-family: var(--ff-body);
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .video-gallery .section-headline {
+      font-family: var(--ff-heading);
+      color: var(--green);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      margin-bottom: 10px;
+    }
+    .video-gallery .gold-line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin: 0 auto 40px;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .video-grid-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 9/16;
+      background: var(--green);
+    }
+    .video-grid-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    @media (max-width: 768px) {
+      .video-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+      .video-bg-section {
+        height: 50vh;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1585,6 +1664,57 @@
       <h2 class="reveal lang-fade" data-en="Beyond Catering" data-pt="Al&eacute;m do Catering">Beyond Catering</h2>
       <p class="cta-subtitle reveal lang-fade" data-en="Hospitality designed around your event." data-pt="Hospitalidade pensada em torno do seu evento.">Hospitality designed around your event.</p>
       <a href="mailto:enquiries@thetablebianchi.co.uk" class="cta-btn reveal lang-fade" data-en="Get in Touch" data-pt="Entre em Contato">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+       VIDEO BACKGROUND
+       ============================================ -->
+  <section class="video-bg-section">
+    <div class="video-overlay"></div>
+    <video autoplay muted loop playsinline>
+      <source src="fotos/video-bg.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- ============================================
+       VIDEO GALLERY
+       ============================================ -->
+  <section class="video-gallery">
+    <p class="section-label reveal lang-fade" data-en="BEHIND THE SCENES" data-pt="NOS BASTIDORES">BEHIND THE SCENES</p>
+    <h2 class="section-headline reveal lang-fade" data-en="Our Kitchen in Action" data-pt="Nossa Cozinha em A&ccedil;&atilde;o">Our Kitchen in Action</h2>
+    <div class="gold-line reveal"></div>
+    <div class="video-grid">
+      <div class="video-grid-item reveal">
+        <video autoplay muted loop playsinline>
+          <source src="fotos/video-gallery-01.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-grid-item reveal">
+        <video autoplay muted loop playsinline>
+          <source src="fotos/video-gallery-02.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-grid-item reveal">
+        <video autoplay muted loop playsinline>
+          <source src="fotos/video-gallery-03.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-grid-item reveal">
+        <video autoplay muted loop playsinline>
+          <source src="fotos/video-gallery-04.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-grid-item reveal">
+        <video autoplay muted loop playsinline>
+          <source src="fotos/video-gallery-05.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="video-grid-item reveal">
+        <video autoplay muted loop playsinline>
+          <source src="fotos/video-gallery-06.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </section>
 
