@@ -932,6 +932,60 @@
     }
 
     /* ============================================
+       TRUSTED BY
+       ============================================ */
+    .trusted-by {
+      background: var(--green-dark);
+      padding: 60px 48px;
+      text-align: center;
+    }
+
+    .trusted-by-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .trusted-by h3 {
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+    }
+
+    .trusted-logos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 60px;
+      flex-wrap: wrap;
+    }
+
+    .trusted-logos img {
+      max-height: 60px;
+      width: auto;
+      opacity: 0.85;
+      filter: brightness(0) invert(1);
+      transition: all 0.3s ease;
+    }
+
+    .trusted-logos img:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .trusted-logos {
+        gap: 40px;
+      }
+
+      .trusted-logos img {
+        max-height: 45px;
+      }
+    }
+
+    /* ============================================
        CONTACT FORM
        ============================================ */
     .contact-form-section {
@@ -1729,6 +1783,21 @@
         <div class="gold-line reveal"></div>
         <p class="approach-quote reveal lang-fade" data-en="Every event is unique." data-pt="Cada evento &eacute; &uacute;nico.">Every event is unique.</p>
         <p class="approach-desc reveal lang-fade" data-en="Our menus are designed specifically for each occasion, combining seasonal ingredients, elegant presentation and professional service." data-pt="Nossos card&aacute;pios s&atilde;o criados especificamente para cada ocasi&atilde;o, combinando ingredientes sazonais, apresenta&ccedil;&atilde;o elegante e servi&ccedil;o profissional.">Our menus are designed specifically for each occasion, combining seasonal ingredients, elegant presentation and professional service.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TRUSTED BY
+       ============================================ -->
+  <section class="trusted-by">
+    <div class="trusted-by-inner">
+      <h3 class="reveal lang-fade" data-en="Trusted By" data-pt="Parceiros">Trusted By</h3>
+      <div class="trusted-logos reveal">
+        <img src="fotos/logo-fvg.png" alt="FVG" loading="lazy">
+        <img src="fotos/logo-circle-site.png" alt="Partner Logo" loading="lazy">
+        <img src="fotos/logo-london-experience.png" alt="London Experience" loading="lazy">
+        <img src="fotos/logo-verde-branca.png" alt="Partner Logo" loading="lazy">
       </div>
     </div>
   </section>
