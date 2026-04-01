@@ -936,13 +936,9 @@
        ============================================ */
     .trusted-by {
       background: var(--green-dark);
-      padding: 60px 48px;
+      padding: 60px 0;
       text-align: center;
-    }
-
-    .trusted-by-inner {
-      max-width: 900px;
-      margin: 0 auto;
+      overflow: hidden;
     }
 
     .trusted-by h3 {
@@ -955,12 +951,39 @@
       margin-bottom: 40px;
     }
 
+    .trusted-logos-wrapper {
+      overflow: hidden;
+      width: 100%;
+      position: relative;
+    }
+
+    .trusted-logos-wrapper::before,
+    .trusted-logos-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 100px;
+      height: 100%;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .trusted-logos-wrapper::before {
+      left: 0;
+      background: linear-gradient(to right, var(--green-dark), transparent);
+    }
+
+    .trusted-logos-wrapper::after {
+      right: 0;
+      background: linear-gradient(to left, var(--green-dark), transparent);
+    }
+
     .trusted-logos {
       display: flex;
-      justify-content: center;
       align-items: center;
-      gap: 60px;
-      flex-wrap: wrap;
+      gap: 80px;
+      animation: scrollLogos 20s linear infinite;
+      width: max-content;
     }
 
     .trusted-logos img {
@@ -968,16 +991,21 @@
       width: auto;
       opacity: 0.85;
       filter: brightness(0) invert(1);
-      transition: all 0.3s ease;
+      flex-shrink: 0;
     }
 
-    .trusted-logos img:hover {
-      opacity: 1;
+    @keyframes scrollLogos {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     @media (max-width: 768px) {
       .trusted-logos {
-        gap: 40px;
+        gap: 60px;
       }
 
       .trusted-logos img {
@@ -1804,13 +1832,17 @@
        TRUSTED BY
        ============================================ -->
   <section class="trusted-by">
-    <div class="trusted-by-inner">
-      <h3 class="reveal lang-fade" data-en="Trusted By" data-pt="Parceiros">Trusted By</h3>
-      <div class="trusted-logos reveal">
-        <img src="fotos/logo-fvg.png" alt="FVG" loading="lazy">
-        <img src="fotos/logo-circle-site.png" alt="Partner Logo" loading="lazy">
-        <img src="fotos/logo-london-experience.png" alt="London Experience" loading="lazy">
-        <img src="fotos/logo-verde-branca.png" alt="Partner Logo" loading="lazy">
+    <h3 class="reveal lang-fade" data-en="Trusted By" data-pt="Parceiros">Trusted By</h3>
+    <div class="trusted-logos-wrapper">
+      <div class="trusted-logos">
+        <img src="fotos/logo-fvg.png" alt="FVG">
+        <img src="fotos/logo-circle-site.png" alt="Partner Logo">
+        <img src="fotos/logo-london-experience.png" alt="London Experience">
+        <img src="fotos/logo-verde-branca.png" alt="Partner Logo">
+        <img src="fotos/logo-fvg.png" alt="FVG">
+        <img src="fotos/logo-circle-site.png" alt="Partner Logo">
+        <img src="fotos/logo-london-experience.png" alt="London Experience">
+        <img src="fotos/logo-verde-branca.png" alt="Partner Logo">
       </div>
     </div>
   </section>
