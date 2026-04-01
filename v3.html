@@ -932,6 +932,112 @@
     }
 
     /* ============================================
+       CONTACT FORM
+       ============================================ */
+    .contact-form-section {
+      background: #e8e2d8;
+      padding: 80px 48px;
+    }
+
+    .contact-form-inner {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--cream);
+      padding: 50px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .contact-form-inner h2 {
+      font-family: var(--ff-heading);
+      font-size: 2rem;
+      color: var(--text-dark);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+
+    .form-group label .required {
+      color: #c44;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      font-family: var(--ff-body);
+      font-size: 0.95rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background: var(--white);
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      font-family: var(--ff-body);
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cream);
+      background: var(--green-dark);
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .form-submit:hover {
+      background: var(--green-header);
+    }
+
+    .form-note {
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      color: var(--text-medium);
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .contact-form-section {
+        padding: 60px 24px;
+      }
+
+      .contact-form-inner {
+        padding: 40px 24px;
+      }
+    }
+
+    /* ============================================
        FOOTER
        ============================================ */
     .footer {
@@ -1699,6 +1805,44 @@
           <source src="fotos/video-07.mp4" type="video/mp4">
         </video>
       </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACT FORM
+       ============================================ -->
+  <section class="contact-form-section">
+    <div class="contact-form-inner reveal">
+      <h2 class="lang-fade" data-en="Contact Us" data-pt="Fale Connosco">Contact Us</h2>
+      <form action="#" method="POST">
+        <div class="form-group">
+          <label class="lang-fade" data-en="Name" data-pt="Nome">Name <span class="required">*</span></label>
+          <input type="text" name="name" required>
+        </div>
+        <div class="form-group">
+          <label class="lang-fade" data-en="Email" data-pt="E-mail">Email <span class="required">*</span></label>
+          <input type="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label class="lang-fade" data-en="Telephone" data-pt="Telefone">Telephone <span class="required">*</span></label>
+          <input type="tel" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label class="lang-fade" data-en="Event Date (optional)" data-pt="Data do Evento (opcional)">Event Date (optional)</label>
+          <input type="date" name="event_date">
+        </div>
+        <div class="form-group">
+          <label class="lang-fade" data-en="Headcount (optional)" data-pt="N&uacute;mero de Convidados (opcional)">Headcount (optional)</label>
+          <input type="number" name="headcount" min="1">
+        </div>
+        <div class="form-group">
+          <label class="lang-fade" data-en="Tell us more (optional)" data-pt="Conte-nos mais (opcional)">Tell us more (optional)</label>
+          <textarea name="message"></textarea>
+        </div>
+        <button type="submit" class="form-submit lang-fade" data-en="Submit" data-pt="Enviar">Submit</button>
+      </form>
+      <p class="form-note lang-fade" data-en="Required fields are marked with *" data-pt="Campos obrigat&oacute;rios marcados com *">Required fields are marked with *</p>
+      <p class="form-note lang-fade" data-en="Never share sensitive information (credit card numbers, social security numbers, passwords) through this form." data-pt="Nunca compartilhe informa&ccedil;&otilde;es sens&iacute;veis (n&uacute;meros de cart&atilde;o de cr&eacute;dito, CPF, senhas) atrav&eacute;s deste formul&aacute;rio.">Never share sensitive information (credit card numbers, social security numbers, passwords) through this form.</p>
     </div>
   </section>
 
