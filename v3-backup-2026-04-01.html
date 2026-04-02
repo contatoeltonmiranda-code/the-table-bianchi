@@ -440,11 +440,10 @@
       left: 0;
       width: 100%;
       height: 100%;
-    }
-    .hero-bg video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      background-image: url('fotos/hero-flatlay-steak.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
 
     .hero-overlay {
@@ -933,195 +932,6 @@
     }
 
     /* ============================================
-       TRUSTED BY
-       ============================================ */
-    .trusted-by {
-      background: var(--green-dark);
-      padding: 60px 0;
-      text-align: center;
-      overflow: hidden;
-    }
-
-    .trusted-by h3 {
-      font-family: var(--ff-body);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 40px;
-    }
-
-    .trusted-logos-wrapper {
-      overflow: hidden;
-      width: 100%;
-      position: relative;
-    }
-
-    .trusted-logos-wrapper::before,
-    .trusted-logos-wrapper::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      width: 100px;
-      height: 100%;
-      z-index: 2;
-      pointer-events: none;
-    }
-
-    .trusted-logos-wrapper::before {
-      left: 0;
-      background: linear-gradient(to right, var(--green-dark), transparent);
-    }
-
-    .trusted-logos-wrapper::after {
-      right: 0;
-      background: linear-gradient(to left, var(--green-dark), transparent);
-    }
-
-    .trusted-logos {
-      display: flex;
-      align-items: center;
-      gap: 80px;
-      animation: scrollLogos 30s linear infinite;
-      width: max-content;
-      padding-left: 80px;
-    }
-
-    .trusted-logos img {
-      max-height: 60px;
-      width: auto;
-      opacity: 0.85;
-      filter: brightness(0) invert(1);
-      flex-shrink: 0;
-    }
-
-    @keyframes scrollLogos {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-25%);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .trusted-logos {
-        gap: 60px;
-      }
-
-      .trusted-logos img {
-        max-height: 45px;
-      }
-    }
-
-    /* ============================================
-       CONTACT FORM
-       ============================================ */
-    .contact-form-section {
-      background: #e8e2d8;
-      padding: 80px 48px;
-    }
-
-    .contact-form-inner {
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--cream);
-      padding: 50px 40px;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-    }
-
-    .contact-form-inner h2 {
-      font-family: var(--ff-heading);
-      font-size: 2rem;
-      color: var(--text-dark);
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .form-group {
-      margin-bottom: 24px;
-    }
-
-    .form-group label {
-      display: block;
-      font-family: var(--ff-body);
-      font-size: 0.9rem;
-      font-weight: 400;
-      color: var(--text-dark);
-      margin-bottom: 8px;
-    }
-
-    .form-group label .required {
-      color: #c44;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 14px 16px;
-      font-family: var(--ff-body);
-      font-size: 0.95rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background: var(--white);
-      transition: border-color 0.3s ease;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
-
-    .form-group textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .form-submit {
-      display: block;
-      width: 100%;
-      padding: 16px;
-      font-family: var(--ff-body);
-      font-size: 0.9rem;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--cream);
-      background: var(--green-dark);
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.3s ease;
-      margin-top: 10px;
-    }
-
-    .form-submit:hover {
-      background: var(--green-header);
-    }
-
-    .form-note {
-      font-family: var(--ff-body);
-      font-size: 0.75rem;
-      color: var(--text-medium);
-      text-align: center;
-      margin-top: 20px;
-      line-height: 1.5;
-    }
-
-    @media (max-width: 768px) {
-      .contact-form-section {
-        padding: 60px 24px;
-      }
-
-      .contact-form-inner {
-        padding: 40px 24px;
-      }
-    }
-
-    /* ============================================
        FOOTER
        ============================================ */
     .footer {
@@ -1131,7 +941,7 @@
 
     .footer-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: 1.3fr 1fr 1.3fr;
       gap: 60px;
       max-width: 1200px;
       margin: 0 auto;
@@ -1181,10 +991,6 @@
       line-height: 1.7;
     }
 
-    .footer-links {
-      justify-self: center;
-    }
-
     .footer-links h4 {
       font-family: var(--ff-heading);
       font-size: 1.1rem;
@@ -1208,10 +1014,6 @@
     .footer-links ul li a:hover {
       color: var(--gold);
       padding-left: 4px;
-    }
-
-    .footer-contact {
-      justify-self: end;
     }
 
     .footer-contact h4 {
@@ -1473,11 +1275,6 @@
         gap: 40px;
       }
 
-      .footer-links,
-      .footer-contact {
-        justify-self: start;
-      }
-
       .nav-logo-text .brand-name {
         font-size: 0.9rem;
       }
@@ -1704,11 +1501,7 @@
        HERO
        ============================================ -->
   <section class="hero" id="hero">
-    <div class="hero-bg">
-      <video autoplay muted loop playsinline>
-        <source src="fotos/hero-bg.mp4" type="video/mp4">
-      </video>
-    </div>
+    <div class="hero-bg"></div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <p class="hero-label lang-fade" data-en="CORPORATE CATERING &amp; HOSPITALITY" data-pt="CATERING CORPORATIVO E HOSPITALIDADE">CORPORATE CATERING &amp; HOSPITALITY</p>
@@ -1752,7 +1545,7 @@
       <!-- Card 2 -->
       <div class="service-card reveal">
         <div class="service-card-img">
-          <img src="fotos/private-dining-platter.jpg" alt="Private dining platter" loading="lazy">
+          <img src="fotos/service-private-dining.jpg" alt="Private dining dish by Chef Gui" loading="lazy">
         </div>
         <div class="service-card-body">
           <h3 class="lang-fade" data-en="Private Dining" data-pt="Jantares Privados">Private Dining</h3>
@@ -1835,33 +1628,6 @@
   </section>
 
   <!-- ============================================
-       TRUSTED BY
-       ============================================ -->
-  <section class="trusted-by">
-    <h3 class="reveal lang-fade" data-en="Trusted By" data-pt="Parceiros">Trusted By</h3>
-    <div class="trusted-logos-wrapper">
-      <div class="trusted-logos">
-        <img src="fotos/logo-fvg.png" alt="FVG">
-        <img src="fotos/logo-circle-site.png" alt="Partner Logo">
-        <img src="fotos/logo-london-experience.png" alt="London Experience">
-        <img src="fotos/logo-verde-branca.png" alt="Partner Logo">
-        <img src="fotos/logo-fvg.png" alt="FVG">
-        <img src="fotos/logo-circle-site.png" alt="Partner Logo">
-        <img src="fotos/logo-london-experience.png" alt="London Experience">
-        <img src="fotos/logo-verde-branca.png" alt="Partner Logo">
-        <img src="fotos/logo-fvg.png" alt="FVG">
-        <img src="fotos/logo-circle-site.png" alt="Partner Logo">
-        <img src="fotos/logo-london-experience.png" alt="London Experience">
-        <img src="fotos/logo-verde-branca.png" alt="Partner Logo">
-        <img src="fotos/logo-fvg.png" alt="FVG">
-        <img src="fotos/logo-circle-site.png" alt="Partner Logo">
-        <img src="fotos/logo-london-experience.png" alt="London Experience">
-        <img src="fotos/logo-verde-branca.png" alt="Partner Logo">
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
        STORY
        ============================================ -->
   <section class="story" id="story">
@@ -1937,44 +1703,6 @@
   </section>
 
   <!-- ============================================
-       CONTACT FORM
-       ============================================ -->
-  <section class="contact-form-section">
-    <div class="contact-form-inner reveal">
-      <h2 class="lang-fade" data-en="Contact Us" data-pt="Fale Connosco">Contact Us</h2>
-      <form action="#" method="POST">
-        <div class="form-group">
-          <label class="lang-fade" data-en="Name" data-pt="Nome">Name <span class="required">*</span></label>
-          <input type="text" name="name" required>
-        </div>
-        <div class="form-group">
-          <label class="lang-fade" data-en="Email" data-pt="E-mail">Email <span class="required">*</span></label>
-          <input type="email" name="email" required>
-        </div>
-        <div class="form-group">
-          <label class="lang-fade" data-en="Telephone" data-pt="Telefone">Telephone <span class="required">*</span></label>
-          <input type="tel" name="phone" required>
-        </div>
-        <div class="form-group">
-          <label class="lang-fade" data-en="Event Date (optional)" data-pt="Data do Evento (opcional)">Event Date (optional)</label>
-          <input type="date" name="event_date">
-        </div>
-        <div class="form-group">
-          <label class="lang-fade" data-en="Headcount (optional)" data-pt="N&uacute;mero de Convidados (opcional)">Headcount (optional)</label>
-          <input type="number" name="headcount" min="1">
-        </div>
-        <div class="form-group">
-          <label class="lang-fade" data-en="Tell us more (optional)" data-pt="Conte-nos mais (opcional)">Tell us more (optional)</label>
-          <textarea name="message"></textarea>
-        </div>
-        <button type="submit" class="form-submit lang-fade" data-en="Submit" data-pt="Enviar">Submit</button>
-      </form>
-      <p class="form-note lang-fade" data-en="Required fields are marked with *" data-pt="Campos obrigat&oacute;rios marcados com *">Required fields are marked with *</p>
-      <p class="form-note lang-fade" data-en="Never share sensitive information (credit card numbers, social security numbers, passwords) through this form." data-pt="Nunca compartilhe informa&ccedil;&otilde;es sens&iacute;veis (n&uacute;meros de cart&atilde;o de cr&eacute;dito, CPF, senhas) atrav&eacute;s deste formul&aacute;rio.">Never share sensitive information (credit card numbers, social security numbers, passwords) through this form.</p>
-    </div>
-  </section>
-
-  <!-- ============================================
        CTA SECTION
        ============================================ -->
   <section class="cta-section" id="contact">
@@ -2003,7 +1731,7 @@
             <div class="footer-tagline">Beyond Catering</div>
           </div>
         </div>
-        <p class="lang-fade" data-en="Bespoke catering and corporate hospitality for executive meetings, private dinners and corporate events. Serving London and beyond." data-pt="Catering sob medida e hospitalidade corporativa para reuni&otilde;es executivas, jantares privados e eventos corporativos. Servindo Londres e al&eacute;m.">Bespoke catering and corporate hospitality for executive meetings, private dinners and corporate events. Serving London and beyond.</p>
+        <p class="lang-fade" data-en="Bespoke catering and corporate hospitality for executive meetings, private dinners and corporate events throughout London." data-pt="Catering sob medida e hospitalidade corporativa para reuni&otilde;es executivas, jantares privados e eventos corporativos em toda Londres.">Bespoke catering and corporate hospitality for executive meetings, private dinners and corporate events throughout London.</p>
       </div>
 
       <!-- Quick Links -->
@@ -2025,13 +1753,7 @@
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
-          <a href="mailto:hello@thetablebianchi.com">hello@thetablebianchi.com</a>
-        </div>
-        <div class="footer-contact-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-          </svg>
-          <a href="tel:+4407760412771">+44 07760412771</a>
+          <a href="mailto:enquiries@thetablebianchi.co.uk">enquiries@thetablebianchi.co.uk</a>
         </div>
         <div class="footer-contact-item">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -2042,15 +1764,15 @@
         </div>
         <div class="footer-social">
           <!-- Instagram -->
-          <a href="https://www.instagram.com/thetablebianchi" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+          <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24">
               <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
             </svg>
           </a>
-          <!-- LinkedIn -->
-          <a href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <!-- Facebook -->
+          <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
           </a>
         </div>
